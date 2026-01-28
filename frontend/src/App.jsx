@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Employees from './pages/Employees'
 import Attendance from './pages/Attendance'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="employees" element={<Employees />} />
         <Route path="attendance" element={<Attendance />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
