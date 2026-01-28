@@ -112,16 +112,32 @@ class AttendanceService:
         return attendance
 
     def count_present_today(self) -> int:
+        # Use date range to handle timezone differences (client may be ahead of UTC server)
+        from datetime import timedelta
+        today = date.today()
+        tomorrow = today + timedelta(days=1)
         return (
             self.db.query(Attendance)
-            .filter(Attendance.date == date.today(), Attendance.status == "Present")
+            .filter(
+                Attendance.date >= today,
+                Attendance.date <= tomorrow,
+                Attendance.status == "Present"
+            )
             .count()
         )
 
     def count_absent_today(self) -> int:
+        # Use date range to handle timezone differences (client may be ahead of UTC server)
+        from datetime import timedelta
+        today = date.today()
+        tomorrow = today + timedelta(days=1)
         return (
             self.db.query(Attendance)
-            .filter(Attendance.date == date.today(), Attendance.status == "Absent")
+            .filter(
+                Attendance.date >= today,
+                Attendance.date <= tomorrow,
+                Attendance.status == "Absent"
+            )
             .count()
         )
 
