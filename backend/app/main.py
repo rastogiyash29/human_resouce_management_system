@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Request, status
+from datetime import date
+from fastapi import FastAPI, Query, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
@@ -46,15 +47,18 @@ def health_check():
 
 
 @app.get("/api/v1/dashboard/stats")
-def get_dashboard_stats():
+def get_dashboard_stats(today: date | None = Query(None)):
     db = SessionLocal()
     try:
         employee_service = EmployeeService(db)
         attendance_service = AttendanceService(db)
 
+        # Use client's date if provided, otherwise fall back to server date
+        target_date = today or date.today()
+
         total_employees = employee_service.count()
-        present_today = attendance_service.count_present_today()
-        absent_today = attendance_service.count_absent_today()
+        present_today = attendance_service.count_by_date_and_status(target_date, "Present")
+        absent_today = attendance_service.count_by_date_and_status(target_date, "Absent")
 
         return {
             "total_employees": total_employees,

@@ -35,6 +35,13 @@ export const updateAttendance = async (id, data) => {
 }
 
 export const getDashboardStats = async () => {
-  const response = await api.get('/api/v1/dashboard/stats')
+  // Send client's local date to handle timezone differences
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  const dateStr = `${year}-${month}-${day}`
+
+  const response = await api.get(`/api/v1/dashboard/stats?today=${dateStr}`)
   return response.data
 }
