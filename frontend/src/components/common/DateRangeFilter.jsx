@@ -183,7 +183,7 @@ export default function DateRangeFilter({ label, value, onChange }) {
       </div>
 
       {isOpen && (
-        <div className="absolute z-10 w-72 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="absolute z-10 w-full sm:w-72 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
           <div className="p-2">
             <div className="grid grid-cols-2 gap-1">
               {Object.entries(presets).map(([key, preset]) => (

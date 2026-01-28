@@ -65,9 +65,9 @@ export default function Employees() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Employees</h2>
-        <Button onClick={() => setIsAddModalOpen(true)}>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900">Employees</h2>
+        <Button onClick={() => setIsAddModalOpen(true)} className="w-full sm:w-auto">
           <Plus className="h-4 w-4 mr-2" />
           Add Employee
         </Button>

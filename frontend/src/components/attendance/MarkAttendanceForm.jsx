@@ -96,11 +96,11 @@ export default function MarkAttendanceForm({ employees, onSubmit, onCancel, load
           required: 'Status is required',
         })}
       />
-      <div className="flex justify-end gap-3 pt-4">
-        <Button variant="secondary" onClick={onCancel} disabled={loading}>
+      <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4">
+        <Button variant="secondary" onClick={onCancel} disabled={loading} className="w-full sm:w-auto">
           Cancel
         </Button>
-        <Button type="submit" loading={loading}>
+        <Button type="submit" loading={loading} className="w-full sm:w-auto">
           Mark Attendance
         </Button>
       </div>

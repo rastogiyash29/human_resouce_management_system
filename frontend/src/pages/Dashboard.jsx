@@ -12,14 +12,14 @@ function StatCard({ title, value, icon: Icon, color }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow p-4 md:p-6">
       <div className="flex items-center">
-        <div className={`p-3 rounded-full ${colors[color]}`}>
-          <Icon className="h-6 w-6" />
+        <div className={`p-2 md:p-3 rounded-full ${colors[color]}`}>
+          <Icon className="h-5 w-5 md:h-6 md:w-6" />
         </div>
-        <div className="ml-4">
-          <p className="text-sm font-medium text-gray-500">{title}</p>
-          <p className="text-2xl font-semibold text-gray-900">{value}</p>
+        <div className="ml-3 md:ml-4">
+          <p className="text-xs md:text-sm font-medium text-gray-500">{title}</p>
+          <p className="text-xl md:text-2xl font-semibold text-gray-900">{value}</p>
         </div>
       </div>
     </div>
@@ -62,8 +62,8 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Dashboard</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Dashboard</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6">
         <StatCard
           title="Total Employees"
           value={stats?.total_employees || 0}

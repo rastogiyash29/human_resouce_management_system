@@ -109,18 +109,18 @@ export default function Attendance() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Attendance</h2>
-        <Button onClick={() => setIsMarkModalOpen(true)} disabled={employees.length === 0}>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900">Attendance</h2>
+        <Button onClick={() => setIsMarkModalOpen(true)} disabled={employees.length === 0} className="w-full sm:w-auto">
           <Plus className="h-4 w-4 mr-2" />
           Mark Attendance
         </Button>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="flex flex-wrap items-end gap-4">
-          <div className="w-72">
+      <div className="bg-white rounded-lg shadow p-3 md:p-4 mb-4 md:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <div>
             <MultiSelect
               label="Employees"
               options={employeeOptions}
@@ -130,14 +130,14 @@ export default function Attendance() {
               allLabel="All Employees"
             />
           </div>
-          <div className="w-72">
+          <div>
             <DateRangeFilter
               label="Date Range"
               value={{ from: filters.dateFrom, to: filters.dateTo }}
               onChange={handleDateFilterChange}
             />
           </div>
-          <div className="w-48">
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
             <select
               value={filters.status || ''}
@@ -152,41 +152,43 @@ export default function Attendance() {
             </select>
           </div>
           {hasActiveFilters && (
-            <Button variant="ghost" onClick={handleResetFilters}>
-              <RotateCcw className="h-4 w-4 mr-2" />
-              Reset Filters
-            </Button>
+            <div className="flex items-end">
+              <Button variant="ghost" onClick={handleResetFilters} className="w-full sm:w-auto">
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+            </div>
           )}
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg shadow p-4 flex items-center gap-4">
-          <div className="p-3 rounded-full bg-blue-50">
-            <UserCheck className="h-6 w-6 text-blue-600" />
+      <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6">
+        <div className="bg-white rounded-lg shadow p-3 md:p-4 flex items-center gap-2 md:gap-4">
+          <div className="p-2 md:p-3 rounded-full bg-blue-50 hidden sm:block">
+            <UserCheck className="h-5 w-5 md:h-6 md:w-6 text-blue-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Total Records</p>
-            <p className="text-2xl font-semibold text-gray-900">{summary.present + summary.absent}</p>
+            <p className="text-xs md:text-sm text-gray-500">Total</p>
+            <p className="text-lg md:text-2xl font-semibold text-gray-900">{summary.present + summary.absent}</p>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-4 flex items-center gap-4">
-          <div className="p-3 rounded-full bg-green-50">
-            <UserCheck className="h-6 w-6 text-green-600" />
+        <div className="bg-white rounded-lg shadow p-3 md:p-4 flex items-center gap-2 md:gap-4">
+          <div className="p-2 md:p-3 rounded-full bg-green-50 hidden sm:block">
+            <UserCheck className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Present</p>
-            <p className="text-2xl font-semibold text-green-600">{summary.present}</p>
+            <p className="text-xs md:text-sm text-gray-500">Present</p>
+            <p className="text-lg md:text-2xl font-semibold text-green-600">{summary.present}</p>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow p-4 flex items-center gap-4">
-          <div className="p-3 rounded-full bg-red-50">
-            <UserX className="h-6 w-6 text-red-600" />
+        <div className="bg-white rounded-lg shadow p-3 md:p-4 flex items-center gap-2 md:gap-4">
+          <div className="p-2 md:p-3 rounded-full bg-red-50 hidden sm:block">
+            <UserX className="h-5 w-5 md:h-6 md:w-6 text-red-600" />
           </div>
           <div>
-            <p className="text-sm text-gray-500">Absent</p>
-            <p className="text-2xl font-semibold text-red-600">{summary.absent}</p>
+            <p className="text-xs md:text-sm text-gray-500">Absent</p>
+            <p className="text-lg md:text-2xl font-semibold text-red-600">{summary.absent}</p>
           </div>
         </div>
       </div>
