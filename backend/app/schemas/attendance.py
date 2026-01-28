@@ -17,7 +17,9 @@ class AttendanceBase(BaseModel):
     @field_validator("date")
     @classmethod
     def validate_date(cls, v: date) -> date:
-        if v > date.today():
+        # Allow 1 day buffer for timezone differences (client may be ahead of UTC server)
+        from datetime import timedelta
+        if v > date.today() + timedelta(days=1):
             raise ValueError("Attendance date cannot be in the future")
         return v
 
@@ -34,7 +36,9 @@ class BulkAttendanceCreate(BaseModel):
     @field_validator("date")
     @classmethod
     def validate_date(cls, v: date) -> date:
-        if v > date.today():
+        # Allow 1 day buffer for timezone differences (client may be ahead of UTC server)
+        from datetime import timedelta
+        if v > date.today() + timedelta(days=1):
             raise ValueError("Attendance date cannot be in the future")
         return v
 
